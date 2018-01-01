@@ -1,4 +1,4 @@
-package de.lalo.jpa.player;
+package de.lalo.jpa.player.entity;
 
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlAccessType;

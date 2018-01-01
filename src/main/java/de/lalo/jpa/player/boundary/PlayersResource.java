@@ -1,4 +1,6 @@
-package de.lalo.jpa.player;
+package de.lalo.jpa.player.boundary;
+
+import de.lalo.jpa.player.entity.Player;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

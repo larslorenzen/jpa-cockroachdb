@@ -1,4 +1,4 @@
-package de.lalo.jpa.player;
+package de.lalo.jpa.player.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,13 @@ public class Player implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
+
+    private String playerReference;
 
     private String email;
+
+    private String state;
 
     private Particulars particulars;
 
@@ -45,8 +49,15 @@ public class Player implements Serializable {
         this.email = email;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
+    public void setPlayerReference(String playerId) {
+        this.playerReference = playerId;
+    }
+
+    public String getPlayerReference() {
+        return playerReference;
+    }
 }
