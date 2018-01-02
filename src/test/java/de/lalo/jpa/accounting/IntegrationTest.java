@@ -7,15 +7,18 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 /**
  * @author llorenzen
  * @since 30.12.17
  */
+@Ignore
 public class IntegrationTest {
 
 
@@ -30,14 +33,22 @@ public class IntegrationTest {
         consumeResponses();
 
         try {
-            for (long index = 0; index < 2; index++) {
+            for (long index = 0; index < 500; index++) {
 
                 long id = 123456 + index;
 
-                String json = "{\"id\": \"" + id + "\", \"playerId\": \"aabbccc\", \"payable\": 0, \"nonPayable\": " + (index + 1) * 100 + ", \"description\": \"just a test\"}";
+
+                UUID uuid = UUID.randomUUID();
+                String key;
+                if (index % 2 == 0) {
+                    key = "aabbccc";
+                } else {
+                    key = uuid.toString();
+                }
+                String json = "{\"id\": \"" + id + "\", \"playerId\": \"" + key + "\", \"payable\": 0, \"nonPayable\": " + (index + 1) * 100 + ", \"description\": \"just a test\"}";
 
                 ProducerRecord<String, String> record =
-                        new ProducerRecord<>(TOPIC, "aabbccc", json);
+                        new ProducerRecord<>(TOPIC, key, json);
 
                 RecordMetadata metadata = producer.send(record).get();
 
@@ -46,7 +57,6 @@ public class IntegrationTest {
                                 "meta(partition=%d, offset=%d) time=%d\n",
                         record.key(), record.value(), metadata.partition(),
                         metadata.offset(), elapsedTime);
-
             }
         } finally {
             producer.flush();

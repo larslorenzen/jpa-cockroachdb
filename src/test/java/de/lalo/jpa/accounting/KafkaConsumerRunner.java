@@ -22,7 +22,7 @@ public class KafkaConsumerRunner implements Runnable {
 
     public void run() {
         try {
-            consumer.subscribe(Arrays.asList("transactionChanges"));
+            consumer.subscribe(Arrays.asList("transactionChanges", "transactionFailures"));
             while (!closed.get()) {
                 ConsumerRecords<String, String> records = consumer.poll(10000);
                 // Handle new records

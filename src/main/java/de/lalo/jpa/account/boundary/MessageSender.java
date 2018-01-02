@@ -45,7 +45,16 @@ public class MessageSender {
         }
     }
 
-    private String toJsonString(TransactionChangedMessage message) throws JsonProcessingException {
+    public void transactionFailure(@Observes TransactionFailure event) {
+        String playerId = event.getTransactionMessage().getPlayerId();
+        try (KafkaConnection connection = factory.createConnection()) {
+            connection.send(new ProducerRecord<>("transactionFailures", playerId, toJsonString(new FailureMessage(event.getFailure()))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String toJsonString(Object message) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(message);
     }

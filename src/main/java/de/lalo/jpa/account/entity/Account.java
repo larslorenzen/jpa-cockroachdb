@@ -2,6 +2,7 @@ package de.lalo.jpa.account.entity;
 
 import de.lalo.jpa.player.entity.Player;
 
+import javax.enterprise.context.Initialized;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.persistence.Version;
@@ -186,7 +188,7 @@ public class Account implements Serializable {
         return playerReference;
     }
 
-    public static Account findByPlayerId(EntityManager entityManager, String playerId) {
+    public static Account findByPlayerId(EntityManager entityManager, String playerId) throws NoResultException {
         TypedQuery<Account> query = entityManager.createNamedQuery("findByPlayerId", Account.class);
         query.setParameter("playerId", playerId);
         return query.getSingleResult();
