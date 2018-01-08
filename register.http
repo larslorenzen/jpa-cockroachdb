@@ -13,3 +13,35 @@ Cache-Control: no-cache
 }
 
 ###
+
+POST http://localhost:8180/api/players HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "type": "CREATED",
+  "playerId": "aabbccc",
+  "currency":"EUR",
+  "email": "aabbccc@example.com",
+  "firstname":"AA",
+  "lastname":"BBCC"
+}
+
+###
+
+POST http://localhost:8180/api/players HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "type": "CREATED",
+  "playerId": "ThePlayer",
+  "currency":"EUR",
+  "email": "The.player@example.com",
+  "firstname":"The",
+  "lastname":"Player"
+}
+
+###
