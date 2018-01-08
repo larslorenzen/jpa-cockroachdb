@@ -1,12 +1,10 @@
 package de.lalo.jpa.player.control;
 
 import de.lalo.jpa.account.control.AccountingService;
-import de.lalo.jpa.player.entity.Player;
 import de.lalo.jpa.player.boundary.PlayerMessage;
+import de.lalo.jpa.player.entity.Player;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +14,6 @@ import javax.persistence.PersistenceContext;
  * @since 30.12.17
  */
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
 public class PlayerService {
 
     @PersistenceContext

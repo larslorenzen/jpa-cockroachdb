@@ -31,7 +31,7 @@ public class AccountingService {
     private EntityManager entityManager;
 
     public void performTransaction(TransactionMessage transactionMessage) {
-        Account account = null;
+        Account account;
         try {
             account = Account.findByPlayerId(entityManager, transactionMessage.getPlayerId());
         } catch (NoResultException e) {
@@ -41,8 +41,6 @@ public class AccountingService {
         Transaction transaction = new Transaction(account, transactionMessage.getId(), transactionMessage.getPayable(), transactionMessage.getNonPayable(), transactionMessage.getDescription());
         transaction.perform();
         entityManager.persist(transaction);
-        entityManager.persist(account);
-
         transactionChangedEvent.fire(new TransactionChangedEvent(transaction));
     }
 

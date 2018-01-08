@@ -18,7 +18,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "players", indexes = {@Index(name = "emailUnique", columnList = "email", unique = true)})
-@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({@NamedQuery(name = "findAll", query = "SELECT p FROM Player p")})
 public class Player implements Serializable {
 
@@ -30,7 +29,7 @@ public class Player implements Serializable {
 
     private String email;
 
-    private String state;
+    private String state = "REGISTERED";
 
     private Particulars particulars;
 
@@ -39,6 +38,10 @@ public class Player implements Serializable {
             particulars = new Particulars();
         }
         return particulars;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public String getEmail() {

@@ -1,0 +1,15 @@
+POST http://localhost:8180/api/players HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "type": "CREATED",
+  "playerId": "jdo",
+  "currency":"EUR",
+  "email": "john.doe@example.com",
+  "firstname":"john",
+  "lastname":"doe"
+}
+
+###

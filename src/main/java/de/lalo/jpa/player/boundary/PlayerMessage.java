@@ -1,9 +1,13 @@
 package de.lalo.jpa.player.boundary;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  * @author llorenzen
  * @since 30.12.17
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PlayerMessage {
 
     private String type; // CREATED, CHANGED

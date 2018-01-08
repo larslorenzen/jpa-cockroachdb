@@ -41,7 +41,7 @@ public class TransactionsListener {
 
     @PostConstruct
     void postConstruct() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             KafkaPoller poller = new KafkaPoller(accountingService, i);
             executorService.execute(poller);
             pollers.add(poller);

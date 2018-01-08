@@ -33,17 +33,25 @@ public class IntegrationTest {
         consumeResponses();
 
         try {
-            for (long index = 0; index < 500; index++) {
+            for (int index = 0; index < 4; index++) {
 
                 long id = 123456 + index;
 
-
                 UUID uuid = UUID.randomUUID();
                 String key;
-                if (index % 2 == 0) {
-                    key = "aabbccc";
-                } else {
-                    key = uuid.toString();
+                int indexMod = index % 4;
+                switch (indexMod) {
+                    case 0:
+                        key = "jdo";
+                        break;
+                    case 1:
+                        key = "aabbccc";
+                        break;
+                    case 2:
+                        key = "ThePlayer";
+                        break;
+                    default:
+                        key = uuid.toString();
                 }
                 String json = "{\"id\": \"" + id + "\", \"playerId\": \"" + key + "\", \"payable\": 0, \"nonPayable\": " + (index + 1) * 100 + ", \"description\": \"just a test\"}";
 
