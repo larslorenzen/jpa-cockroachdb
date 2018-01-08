@@ -50,6 +50,8 @@ spec:
               fieldPath: metadata.namespace
         - name: PROJECT_STAGE
           value: SystemTest
+        - name: JVM_OPTIONS
+          value: -Dkafka.servers=cockroachdb:26257
         ports:
         - containerPort: 8080
       terminationGracePeriodSeconds: 30
