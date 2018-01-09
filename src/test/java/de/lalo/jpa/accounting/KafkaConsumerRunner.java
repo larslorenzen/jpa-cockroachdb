@@ -7,6 +7,9 @@ import org.apache.kafka.common.errors.WakeupException;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static de.lalo.jpa.accounting.IntegrationTest.NUM_MESSAGES;
 
 /**
  * @author llorenzen
@@ -15,6 +18,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class KafkaConsumerRunner implements Runnable {
     private final AtomicBoolean closed = new AtomicBoolean(false);
     private final KafkaConsumer consumer;
+
+    private AtomicInteger counter = new AtomicInteger();
 
     public KafkaConsumerRunner(KafkaConsumer consumer) {
         this.consumer = consumer;
@@ -28,8 +33,13 @@ public class KafkaConsumerRunner implements Runnable {
                 // Handle new records
                 for (ConsumerRecord<String, String> record : records) {
                     System.out.println(record);
+                    counter.incrementAndGet();
+                }
+                if (counter.get() >= NUM_MESSAGES) {
+                    closed.set(true);
                 }
             }
+            consumer.commitAsync();
         } catch (WakeupException e) {
             // Ignore exception if closing
             if (!closed.get()) throw e;

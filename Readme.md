@@ -1,5 +1,13 @@
 # Example project: kafka-driven accounting
 
+## Prerequisites
+### Database
+To run the application you need a postgres or cockroachDB database running.
+There must be a database `lotto` available. The user/server information is located in the `src/main/docker/postbootcommands.asadmin` file.
+
+### Kafka
+A kafka cluster is required (local dev cluster is sufficient). 
+
 ## Getting started
 
 Path to jar:  
@@ -12,7 +20,7 @@ VM options (define the kafka server... in this case just the local dev cluster):
 `-Dkafka.servers=localhost:9092`
 
 Program arguments:  
-`--deploy kafka-rar.rar --addJars postgresql.jar --deploy ROOT.war --port 8180 --postbootcommandfile ../src/main/docker/postbootcommands.asadmin`
+`--deploy kafka-rar.rar --addJars postgresql.jar --deploy ROOT.war --port 8080 --postbootcommandfile ../src/main/docker/postbootcommands.asadmin`
 
 Set the working directory to the maven target folder
 

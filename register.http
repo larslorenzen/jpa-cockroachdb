@@ -1,4 +1,4 @@
-POST http://localhost:8180/api/players HTTP/1.1
+POST http://localhost:8080/api/players HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Cache-Control: no-cache
@@ -14,7 +14,7 @@ Cache-Control: no-cache
 
 ###
 
-POST http://localhost:8180/api/players HTTP/1.1
+POST http://localhost:8080/api/players HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Cache-Control: no-cache
@@ -30,7 +30,7 @@ Cache-Control: no-cache
 
 ###
 
-POST http://localhost:8180/api/players HTTP/1.1
+POST http://localhost:8080/api/players HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Cache-Control: no-cache

@@ -21,10 +21,12 @@ import java.util.concurrent.ExecutionException;
 @Ignore
 public class IntegrationTest {
 
+    static final int NUM_MESSAGES = 4;
 
     private final static String TOPIC = "transactions";
     private final static String BOOTSTRAP_SERVERS = "localhost:9092";
     private KafkaConsumerRunner runner;
+    private Thread consumerThread;
 
     @Test
     public void testCreateTransactions() throws ExecutionException, InterruptedException {
@@ -33,7 +35,7 @@ public class IntegrationTest {
         consumeResponses();
 
         try {
-            for (int index = 0; index < 4; index++) {
+            for (int index = 0; index < NUM_MESSAGES; index++) {
 
                 long id = 123456 + index;
 
@@ -70,15 +72,16 @@ public class IntegrationTest {
             producer.flush();
             producer.close();
         }
-        Thread.sleep(60000);
+        consumerThread.join(60000);
+//        Thread.sleep(60000);
         runner.shutdown();
     }
 
     public void consumeResponses() {
         KafkaConsumer consumer = createConsumer();
         runner = new KafkaConsumerRunner(consumer);
-        Thread thread = new Thread(runner);
-        thread.start();
+        consumerThread = new Thread(runner);
+        consumerThread.start();
     }
 
     private static KafkaConsumer createConsumer() {
