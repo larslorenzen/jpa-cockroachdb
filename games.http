@@ -1,0 +1,13 @@
+POST http://localhost:8081/api/games/play HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Cache-Control: no-cache
+playerId: jdo
+
+{
+  "gameName": "spinTheWheel",
+  "playerId": "jdo",
+  "stake": 120
+}
+
+###

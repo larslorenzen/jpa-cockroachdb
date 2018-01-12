@@ -38,6 +38,6 @@ The kafka message body has to be in JSON format with the following content:
 ## Responses
 
 The responses are delivered in 2 different topics:
-- `transactionChanges` for successful transactions
+- `accountUpdates` for successful transactions
 - `transactionFailures` for failures during processing
 
